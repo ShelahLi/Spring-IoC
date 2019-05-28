@@ -21,5 +21,15 @@
     <!--bean的作用范围-->
     <bean id="person" class="com.lucky.ioc.demo3.Person" scope="prototype"></bean>
 
+    <bean id="man" class="com.lucky.ioc.demo3.Man" init-method="setup" destroy-method="teardown">
+        <property name="name" value="张三"></property>
+    </bean>
+    <!--后处理：不需要配置id-->
+    <bean class="com.lucky.ioc.demo3.MyBeanPostProcessor"></bean>
+
+    <bean id="userDao" class="com.lucky.ioc.demo3.UserDaoImpl"></bean>
+
+
+
 
 </beans>

@@ -20,7 +20,8 @@ public class SpringDemo3 {
 
     @Test
     public void demo2(){
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("config/spring/applicationContext.xml");
         Man man = (Man)applicationContext.getBean("man");
 
         man.run();
@@ -30,10 +31,12 @@ public class SpringDemo3 {
 
     @Test
     public void demo3(){
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("config/spring/applicationContext.xml");
         UserDao userDao = (UserDao)applicationContext.getBean("userDao");
 
         userDao.findAll();
+        //保存之前进行消效验
         userDao.save();
         userDao.update();
         userDao.delete();
