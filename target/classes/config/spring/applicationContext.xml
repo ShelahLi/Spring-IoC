@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
     <!--UserService的创建权交给了spring-->
@@ -19,7 +20,7 @@
 
 
     <!--bean的作用范围-->
-    <bean id="person" class="com.lucky.ioc.demo3.Person" scope="prototype"></bean>
+    <bean id="person1" class="com.lucky.ioc.demo3.Person" scope="prototype"></bean>
 
     <bean id="man" class="com.lucky.ioc.demo3.Man" init-method="setup" destroy-method="teardown">
         <property name="name" value="张三"></property>
@@ -30,6 +31,81 @@
     <bean id="userDao" class="com.lucky.ioc.demo3.UserDaoImpl"></bean>
 
 
+    <!--bean构造方法注入属性-->
+    <bean id="user" class="com.lucky.ioc.demo4.User">
+        <constructor-arg name="name" value="lth"/>
+        <constructor-arg name="age" value="23"/>
+    </bean>
+    <!--bean的setter方法注入属性-->
+    <bean id="cat" class="com.lucky.ioc.demo4.Cat">
+        <property name="name" value="ketty"/>
+    </bean>
+    <bean id="person" class="com.lucky.ioc.demo4.Person">
+        <property name="name" value="lth"/>
+        <property name="age" value="23"/>
+        <!--ref用户来引入其他bean的id或者是name-->
+        <property name="cat" ref="cat"/>
+    </bean>
+
+    <!--bean的p名称空间注入属性-->
+    <bean id="cat1" class="com.lucky.ioc.demo4.Cat" p:name="小菊">
+    </bean>
+    <bean id="person2" class="com.lucky.ioc.demo4.Person" p:name="lth" p:age="23" p:cat-ref="cat1">
+    </bean>
+
+    <!--bean的SpEL注入属性-->
+    <bean id="productInfo" class="com.lucky.ioc.demo4.ProductInfo"></bean>
+    <bean id="category" class="com.lucky.ioc.demo4.Category">
+        <property name="name" value="#{'服装'}"/>
+    </bean>
+    <bean id="product" class="com.lucky.ioc.demo4.Product">
+        <property name="name" value="#{'男装'}"/>
+        <property name="price" value="#{productInfo.calculatePrice()}"/>
+        <property name="category" value="#{category}"/>
+    </bean>
+
+    <!--集合类型的属性注入-->
+    <bean id="collectionBean" class="com.lucky.ioc.demo5.CollectionBean">
+        <!--数组类型属性注入-->
+        <property name="arrs">
+            <list>
+                <value>a1</value>
+                <value>b1</value>
+                <value>c1</value>
+            </list>
+        </property>
+        <!--list类型属性注入-->
+        <property name="list">
+            <list>
+                <value>a2</value>
+                <value>b2</value>
+                <value>c2</value>
+            </list>
+        </property>
+        <!--Set集合属性注入-->
+        <property name="set">
+            <set>
+                <value>a3</value>
+                <value>b3</value>
+                <value>c3</value>
+            </set>
+        </property>
+        <!--Map集合属性注入-->
+        <property name="map">
+            <map>
+                <entry key="a4" value="a4"/>
+                <entry key="b4" value="b4"/>
+                <entry key="c4" value="c4"/>
+            </map>
+        </property>
+        <!--Map集合属性注入-->
+        <property name="properties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+    </bean>
 
 
 </beans>
