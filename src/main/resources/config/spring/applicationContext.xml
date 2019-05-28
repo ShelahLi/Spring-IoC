@@ -16,5 +16,10 @@
     <!--第三种：实例工厂方式-->
     <bean id="bean3Factory" class="com.lucky.ioc.demo2.Bean3Factory"></bean>
     <bean id="bean3" factory-bean="bean3Factory" factory-method="createBean3"></bean>
-    
+
+
+    <!--bean的作用范围-->
+    <bean id="person" class="com.lucky.ioc.demo3.Person" scope="prototype"></bean>
+
+
 </beans>
