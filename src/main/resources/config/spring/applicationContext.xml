@@ -7,4 +7,14 @@
         <!--设置属性:引号里面就是对应的属性名称，要和该类定义的属性名一致-->
         <property name="name" value="李四"/>
     </bean>
+
+    <!--bean实例化的三种方式-->
+    <!--第一种无参构造器的方式-->
+    <bean id="bean1" class="com.lucky.ioc.demo2.Bean1"></bean>
+    <!--第二种：静态工厂方式-->
+    <bean id="bean2" class="com.lucky.ioc.demo2.Bean2Factory" factory-method="createBean2"></bean>
+    <!--第三种：实例工厂方式-->
+    <bean id="bean3Factory" class="com.lucky.ioc.demo2.Bean3Factory"></bean>
+    <bean id="bean3" factory-bean="bean3Factory" factory-method="createBean3"></bean>
+    
 </beans>
